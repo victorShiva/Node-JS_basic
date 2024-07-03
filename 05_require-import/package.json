@@ -1,0 +1,16 @@
+{
+  "name": "05_require-import",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shiva",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "figlet": "^1.7.0",
+    "random-words": "^2.0.1"
+  }
+}
