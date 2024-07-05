@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram </title>
+</head>
+
+<body>
+    <h1>
+        This page belongs to @<%= userName %>
+    </h1>
+    <button>Follow</button>
+    <button>Message</button>
+    <h3>Account that follow you : </h3>
+    <ul>
+        <% for (let user of followers) { %>
+            <li>
+                <%= user %>
+            </li>
+            <% } %>
+    </ul>
+</body>
+
+</html>
