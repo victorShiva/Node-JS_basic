@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All posts</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="top-badge">
+        <h1>Quora Posts</h1>
+        <a href="http://localhost:3030/posts/new">Create New Post</a>
+    </div>
+    <% for( let i=0; i < posts.length; i++ ) { %>
+        <div class="post">
+            <h2 class="user">
+                @<%= posts[i].username %>
+            </h2>
+            <h4 class="content">
+                <%= posts[i].content %>
+            </h4>
+            <div class="right-side">
+                <button>
+                    <a href="http://localhost:3030/posts/<%= posts[i].id%>">
+                        See in Detail
+                    </a>
+                </button>
+                <button>
+                    <a href="http://localhost:3030/posts/<%= posts[i].id%>/edit">
+                        Edit-Post
+                    </a>
+                </button>
+                <form method="post" action="posts/<%= posts[i].id%>?_method=DELETE" style="display: inline-block;">
+                    <button>
+                        <a style="text-decoration: underline;">
+                            Delete-Post
+                        </a>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <% } %>
+
+            <br><br>
+
+</body>
+
+</html>
