@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('includes/head.ejs') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post in Detail</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
+    <body>
+        <h1>Here is your post in details</h1>
+        <div class="post">
+            <h3>
+                Post id : <%= post.id %>
+            </h3>
+            <h2 class="user">
+                @<%= post.username %>
+            </h2>
+            <h4 class="content">
+                <%= post.content %>
+            </h4>
+        </div>
 
-<body>
-    <h1>Here is your post in details</h1>
-    <div class="post">
-        <h3>
-            Post id : <%= post.id %>
-        </h3>
-        <h2 class="user">
-            @<%= post.username %>
-        </h2>
-        <h4 class="content">
-            <%= post.content %>
-        </h4>
-    </div>
-
-</body>
-
-</html>
+    </body>

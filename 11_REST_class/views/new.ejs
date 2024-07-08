@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('includes/head.ejs') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New post</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-
-<body>
-    <div class="post">
-        <form method="post" action="/posts">
-            <input placeholder="Enter Username" type="text" name="username">
-            <br>
-            <br>
-            <textarea placeholder="Write your post" name="content" cols="40" rows="5"></textarea>
-            <br>
-            <button>Submit</button>
-        </form>
-    </div>
-</body>
-
-</html>
+    <body>
+        <div class="post">
+            <form method="post" action="/posts">
+                <input placeholder="Enter Username" type="text" name="username">
+                <br>
+                <br>
+                <textarea placeholder="Write your post" name="content" cols="40" rows="5"></textarea>
+                <br>
+                <button>Submit</button>
+            </form>
+        </div>
+    </body>
