@@ -72,7 +72,6 @@ app.get('/user/:id/edit', (req, res) => {
 app.patch('/user/:id', (req, res) => {
     let { id } = req.params;
     let { password: formPassword, username: newUser } = req.body;
-    console.log(formPassword, newUser);
     let q = `SELECT * FROM user WHERE id = "${id}"`;
     try {
         connection.query(q, function (err, result) {
@@ -119,7 +118,39 @@ app.post('/user', (req, res) => {
     }
 })
 
+app.get('/user/:username/:id/delete', (req, res) => {
+    let { username, id } = req.params;
+    res.render('delete.ejs', { username, id });
+})
 
+app.delete('/user/:id', (req, res) => {
+    let { email: userEmail, password: userPassword } = req.body;
+    let { id } = req.params;
+    let q = `SELECT * FROM user WHERE id = '${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+            if (err) throw err;
+            let { email: orgEmail, password: orgPassword } = result[0];
+            if (userEmail == orgEmail && userPassword == orgPassword) {
+                let q2 = `DELETE FROM user WHERE id='${id}'`;
+                try {
+                    connection.query(q2, (err, result) => {
+                        if (err) throw err;
+                        res.send('Delete User Successfully');
+                    })
+                } catch (error) {
+                    res.send("SOME ERRRO IN DB")
+                }
+            } else if (userEmail != orgEmail) {
+                res.send('Email is Incorect!');
+            } else {
+                res.send('Password is incorect!');
+            }
+        })
+    } catch (error) {
+        res.send("Some Error in DB")
+    }
+})
 
 
 app.listen(port, () => {
