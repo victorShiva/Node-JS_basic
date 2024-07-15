@@ -67,3 +67,27 @@ const studentSchema = new mongoose.Schema({
 // }])
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err))
+
+
+
+//************ find the user
+const User = mongoose.model("User", studentSchema);
+// User.find({})                                 //.find()
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err))
+
+
+// User.find({ age: { $gt: 30 } })
+//     .then(res => console.log(res[0].name))
+//     .catch(err => console.log(err))
+
+
+// User.findOne({ age: 32 })
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err))
+
+
+
+User.findById({ _id: "6694ee9beee82913bc0aea63" })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
