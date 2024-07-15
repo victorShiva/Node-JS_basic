@@ -88,6 +88,39 @@ const User = mongoose.model("User", studentSchema);
 
 
 
-User.findById({ _id: "6694ee9beee82913bc0aea63" })
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+// User.findById({ _id: "6694ee9beee82913bc0aea63" })
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err))
+
+
+
+
+
+
+// ------------------- update-----------------
+// User.updateOne({ age: 49 }, { age: 45 })
+//     .then(data => console.log(data))
+
+// User.updateMany({ age: { $gt: 40 } }, { age: 45 })
+//     .then(data => console.log(data))
+
+
+// User.findOneAndUpdate({ name: "Dolly" }, { age: 34 }, { new: true })
+//     .then(data => console.log(data))
+
+// User.findByIdAndUpdate({ _id: "6694ee9beee82913bc0aea63" }, { age: 21 }, { new: true })
+//     .then(data => console.log(data))
+
+
+
+
+//---------------------- delete ----------------
+
+User.deleteOne({ name: "Dolly" }).then(data => console.log(data))
+
+User.deleteMany({ age: { $gt: 40 } }).then(data => console.log(data))
+
+
+User.findOneAndDelete({ name: "Anshu" }, { new: true }).then(data => console.log(data))
+
+User.findByIdAndDelete({ _id: "6694ee9beee82913bc0aea63" }, { new: true }).then(data => console.log(data))
