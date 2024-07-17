@@ -1,0 +1,49 @@
+body{
+    margin-left: 20px;
+}
+h2{
+    background-color: rgb(187, 81, 32);
+    color: whitesmoke;
+    width:max-content;
+    padding: 10px;
+}
+.chat{
+    background-color: bisque;
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 25%;
+}
+.msg{
+    background-color: rgb(197, 123, 33);
+    color: aliceblue;
+    padding: 15px 10px;
+    border-radius: 1rem;
+    text-align: right;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.msg p {
+    padding-right: 1rem;
+    text-decoration: underline #dfcfcf83;
+    text-align:end;
+}
+button{
+    margin-bottom: 1rem;
+}
+span:nth-child(1){
+    float:right ;
+}
+form{
+    text-align: left;
+    display: inline;
+}
+form button{
+    /* transform: translateY(-50%); */
+    margin: 0%;
+}
+.btns{
+    display: flex;
+}
