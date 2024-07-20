@@ -17,9 +17,10 @@ app.use('/api', (req, res, next) => {
 const checkToken = (req, res, next) => {
     let { token } = req.query;
     if (token === 'giveaccess') {
-        next();
+        return next();
     }
-    res.send("ACCESS DENIED!")
+    // res.send("ACCESS DENIED!")
+    throw new Error("ACCESS DENIED!");
 }
 
 // Routes
@@ -29,7 +30,6 @@ app.get('/api', checkToken, (req, res) => {
         age: 23
     })
 })
-
 app.get('/', (req, res) => {
     res.send("I a Root Page");
 })

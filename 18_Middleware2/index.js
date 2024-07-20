@@ -15,6 +15,7 @@ const port = 3030;
 app.use('/random', (req, res, next) => {
     console.log("Only for random path");        // it is print only for http://localhost:3030/random/...........
     next();
+    console.log("After next call it is execute");
 })
 
 
