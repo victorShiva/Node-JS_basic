@@ -1,4 +1,7 @@
 // module.exports = 100;                       //  module.exports is an {};
+// module.exports = "shiva"            //only last module is export
+
+
 
 
 
@@ -33,14 +36,14 @@ module.exports = obj;
 
 
 
-module.exports.sum = function (a, b) {
-    return a + b;
-}
-module.exports.mul = function (a, b) {
-    return a * b;
-}
-module.exports.g = 9.8;
-module.exports.PI = 3.14;
+// module.exports.sum = function (a, b) {
+//     return a + b;
+// }
+// module.exports.mul = function (a, b) {
+//     return a * b;
+// }
+// module.exports.g = 9.8;
+// module.exports.PI = 3.14;
 
 
 
@@ -55,5 +58,5 @@ exports.mul = function (a, b) {
 exports.g = 9.8;
 exports.PI = 3.14;
 */
-// exports = 100;              // treate as variable
+exports = 100;              // treate as variable
 
