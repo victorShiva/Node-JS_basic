@@ -135,13 +135,32 @@ app.delete('/chats/:id', wrapAsync(async (req, res, next) => {
 function wrapAsync(fn) {
     return function (req, res, next) {
         fn(req, res, next)
-            .catch(err => next(err));
+            .catch(err => {
+                console.log(err);
+                next(err)
+            });
     }
 }
 
+
+// Mongoose Error handler
+const handleValidationErr = (err) => {
+    console.log("This was a Validation Error Please Follow rule");
+    console.log("Error Messagw :", err.message);
+    console.dir(err);
+    return err;
+}
+app.use((err, req, res, next) => {
+    console.log(err.name);
+    if (err.name === "ValidationError") {
+        err = handleValidationErr(err);
+    }
+    next(err);
+})
+
 // Error Handling Middleware 
 app.use((err, req, res, next) => {
-    let { status = 500, message = 'Some Error Occured' } = err;
+    let { status = 501, message = 'Some Error Occured' } = err;
     res.status(status).send(message);
 })
 
