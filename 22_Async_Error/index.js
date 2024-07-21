@@ -88,19 +88,15 @@ app.post('/chats', wrapAsync(async (req, res, next) => {
 }))
 
 //Show Chat
-app.get('/chats/:id', async (req, res, next) => {
-    try {
-        let { id } = req.params;
-        let chat = await Chat.findById(id);
-        if (!chat) {
-            return next(new ExpressError('404 ', 'Chat not found!'));
-        }
-        res.render('edit.ejs', { chat })
-    } catch (error) {
-        next(error);
+app.get('/chats/:id', wrapAsync(async (req, res, next) => {
+    let { id } = req.params;
+    let chat = await Chat.findById(id);
+    if (!chat) {
+        return next(new ExpressError('404 ', 'Chat not found!'));
     }
-
-})
+    res.render('edit.ejs', { chat })
+}
+))
 
 //render a form to edit chat
 app.get('/chats/:id/edit', wrapAsync(async (req, res, next) => {
@@ -136,7 +132,7 @@ function wrapAsync(fn) {
     return function (req, res, next) {
         fn(req, res, next)
             .catch(err => {
-                console.log(err);
+                // console.log(err);
                 next(err)
             });
     }
@@ -146,8 +142,8 @@ function wrapAsync(fn) {
 // Mongoose Error handler
 const handleValidationErr = (err) => {
     console.log("This was a Validation Error Please Follow rule");
-    console.log("Error Messagw :", err.message);
-    console.dir(err);
+    console.log(err.message);
+    // console.dir(err);cls
     return err;
 }
 app.use((err, req, res, next) => {

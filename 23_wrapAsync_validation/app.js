@@ -5,6 +5,8 @@ const path = require('path');
 const { send } = require('process');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const wrapAsync = require('./utils/wrapAsync.js');
+const ExpressError = require('./utils/expressError.js');
 
 const app = express();
 
@@ -83,12 +85,13 @@ app.get('/listings/:id', async (req, res) => {
 //     console.log(result);
 //     res.redirect('/listings');
 // })
-app.post('/listings', async (req, res) => {
+app.post('/listings', wrapAsync(async (req, res, next) => {
     let listing = req.body.listing;
     const newListing = new Listing(listing);
     await newListing.save();
     res.redirect('/listings');
-})
+}
+))
 
 
 // Edit Route
@@ -106,7 +109,7 @@ app.put('/listings/:id', async (req, res, next) => {
         let updateListing = await Listing.findByIdAndUpdate(id, listing, { runValidators: true, new: true });
         res.redirect(`/listings/${id}`);
     } catch (error) {
-        console.log("My Name is Error : ");
+        // console.log("my err", error);
         next(error);
     }
 
@@ -122,6 +125,26 @@ app.listen(8080, () => {
     console.log(`Server running at http://localhost:8080`);
 })
 
+
+/*
+//              ---------------------------- (1) -----------------------
+// app.use((err, req, res, next) => {
+//     console.log(err.name);
+//     console.log(err.message);
+//     next(err);
+// })
+// app.use((err, eq, res, next) => {
+//     let { status = 400, message = "Something went wrong" } = err;
+//     res.status(status).send(message);
+// })
+*/
+
+
+
+
+//              -----------------------------(2) -----------------
 app.use((err, req, res, next) => {
-    console.log("Hello I am Error");
+    res.send("Something went Wrong");
 })
+
+
