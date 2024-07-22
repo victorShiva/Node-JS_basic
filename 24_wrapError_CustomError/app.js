@@ -53,20 +53,24 @@ app.get('/listings/new', (req, res) => {
     res.render('listings/new.ejs')
 })
 
+//-------------------------------- Custom  Error Handling ------------------------------
 
 // Create Route
 app.post('/listings', async (req, res, next) => {
     // console.log(req.body.listing);
     try {
         let listing = req.body.listing;
+        // console.log(listing);
         if (!req.body.listing) return next(new ExpressError(400, "Send valid data for listing"));
-        const newListing = new Listing(listing);
+        const newListing = new Listing(listing);                                                // console.log(newListing);
+        if (!newListing.description) return next(new ExpressError(400, "Description is missing"));
+        if (!newListing.location) return next(new ExpressError(400, "location is missing"));
+        if (!newListing.country) return next(new ExpressError(400, "country is missing"));
         await newListing.save();
         res.redirect('/listings');
     } catch (error) {
         next(error);
     }
-
 })
 
 
@@ -96,18 +100,24 @@ app.get('/listings/:id/edit', async (req, res, next) => {
 })
 
 
+// -------------------------------------  Custom Error Handling --------------------------------
+
 // Update Route
 app.put('/listings/:id', async (req, res, next) => {
     try {
         let { id } = req.params;
+        if (!req.body.listing) return next(new ExpressError(400, "Send valid data for listing"));
         let listing = req.body.listing;
-        if (!req.body.listing) return next(new ExpressError(400, "Send valid data for listing"))
+        // console.log(listing);
+        if (!listing.description) return next(new ExpressError(400, "Description is missing"));
+        if (!listing.country) return next(new ExpressError(400, "country is missing"));
+        if (!listing.location) return next(new ExpressError(400, "location is missing"));
         let updateListing = await Listing.findByIdAndUpdate(id, listing, { runValidators: true, new: true });
+        // console.log(updateListing);
         res.redirect(`/listings/${id}`);
     } catch (error) {
         next(error);
     }
-
 })
 
 app.delete('/listings/:id', async (req, res, next) => {
@@ -129,6 +139,7 @@ app.all('*', (req, res, next) => {                      // * is all route  which
 })
 
 app.use((err, req, res, next) => {
+    console.log(err);
     let { statusCode = 400, message = "Something WentWrong" } = err;
     res.status(statusCode).render('error.ejs', { message });                                       //err  //err.stack
     // res.status(status).send(message);
