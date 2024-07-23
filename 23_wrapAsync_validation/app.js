@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Listing = require('./models/listing.js');
 const path = require('path');
-const { send } = require('process');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
