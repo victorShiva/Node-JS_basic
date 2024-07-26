@@ -4,6 +4,11 @@ const users = require('./routes/users.js');
 const posts = require('./routes/posts.js');
 
 
+app.get('/getcookies', (req, res) => {
+    res.cookie("greet", "Hello Shiva");
+    res.cookie("country", "India");
+    res.send("Some cookies are send");
+})
 app.get('/', (req, res) => {
     res.send('THis is root path');
 })
