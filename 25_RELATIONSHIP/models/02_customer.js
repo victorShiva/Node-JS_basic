@@ -19,7 +19,7 @@ const customerSchema = new Schema({
     orders: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Order'
+            ref: 'Order',                           // model name
         }
     ]
 })
