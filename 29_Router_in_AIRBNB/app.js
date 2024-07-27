@@ -5,9 +5,10 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
 const ExpressError = require('./utils/expressError.js');
-
+const session = require('express-session');
 const listings = require('./routers/listings.js');
 const reviews = require('./routers/reviews.js');
+var flash = require('connect-flash');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -17,6 +18,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
+
+
+const sessionOpt = {
+    secret: 'supersecretcode',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    }
+}
+
+app.use(session(sessionOpt));
+app.use(flash());
 
 const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 async function main() {
@@ -29,6 +45,12 @@ main()
 
 app.get('/', (req, res) => {
     res.send('Hi i am root')
+})
+
+app.use((req, res, next) => {
+    res.locals.successMsg = req.flash("success");
+    res.locals.errorMsg = req.flash("error");
+    next();
 })
 
 app.use('/listings', listings);
