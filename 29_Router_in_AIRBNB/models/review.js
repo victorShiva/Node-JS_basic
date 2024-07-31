@@ -12,6 +12,10 @@ const reviewSchema = new Schema({
         type: Date,
         default: new Date(),
     },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 
 module.exports = model("Review", reviewSchema);

@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV != "production") {
+    require('dotenv').config();
+}
+// console.log(process.env.SECRET);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -60,6 +65,7 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash("success");
     res.locals.errorMsg = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 })
 
