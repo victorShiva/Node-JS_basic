@@ -57,11 +57,6 @@ main()
     .then(() => console.log('Connected to DB'))
     .catch((err) => console.log(err));
 
-
-app.get('/', (req, res) => {
-    res.send('Hi i am root')
-})
-
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash("success");
     res.locals.errorMsg = req.flash("error");

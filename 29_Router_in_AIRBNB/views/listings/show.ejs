@@ -1,4 +1,8 @@
 <% layout('layouts/boilerplate.ejs') %>
+    <script>
+        const mapToken = '<%= process.env.PUBLIC_TOKEN%>';
+        let listing = '<%-JSON.stringify(listing) %>';
+    </script>
     <div class="row">
         <div class="col-8 offset-3 mt-3">
             <h2>
@@ -70,26 +74,34 @@
                         </form>
                         <hr>
                         <% } %>
-                            <h3>All Reviews </h3>
-                            <div class="row">
-                                <% for(let review of listing.reviews){ %>
-                                    <div class="card col-5 mb-3 mt-2 ms-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">@
-                                                <%= review.author.username %>
-                                            </h5>
-                                            <p class="starability-result card-text" data-rating="<%= review.rating %>">
-                                            </p>
-                                            <p class="card-text">
-                                                <%= review.comment %>
-                                            </p>
+                            <% if(listing.reviews .length> 0){ %>
+                                <h3>All Reviews </h3>
+                                <div class="row">
+                                    <% for(let review of listing.reviews){ %>
+                                        <div class="card col-5 mb-3 mt-2 ms-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@
+                                                    <%= review.author.username %>
+                                                </h5>
+                                                <p class="starability-result card-text"
+                                                    data-rating="<%= review.rating %>">
+                                                </p>
+                                                <p class="card-text">
+                                                    <%= review.comment %>
+                                                </p>
 
+                                            </div>
+                                            <form class="mb-2 mt-2" method="POST"
+                                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=Delete">
+                                                <button class="btn btn-sm btn-dark">Delete</button>
+                                            </form>
                                         </div>
-                                        <form class="mb-2 mt-2" method="POST"
-                                            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=Delete">
-                                            <button class="btn btn-sm btn-dark">Delete</button>
-                                        </form>
-                                    </div>
-                                    <% } %>
-                            </div>
+                                        <% } %>
+                                </div>
+                                <% } %>
                 </div>
+                <div class="col-8 offset-2">
+                    <h3>Where you'll be</h3>
+                    <div id="map"></div>
+                </div>
+                <script src="/js/map.js"></script>

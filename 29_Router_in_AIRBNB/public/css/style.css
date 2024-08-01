@@ -82,3 +82,11 @@ footer{
 .del-btn{
     margin-left: 1rem;
 }
+
+
+
+/* Map  */
+#map {
+    height: 350px;
+    /* width: 50vw; */
+ }
