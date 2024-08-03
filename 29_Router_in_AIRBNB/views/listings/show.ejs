@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate.ejs') %>
     <script>
         const mapToken = '<%= process.env.PUBLIC_TOKEN%>';
-        let listing = '<%-JSON.stringify(listing) %>';
+        let coordinates = '<%- JSON.stringify(listing.geometry.coordinates) %>';
+        console.log(coordinates);
     </script>
     <div class="row">
         <div class="col-8 offset-3 mt-3">
@@ -74,6 +75,7 @@
                         </form>
                         <hr>
                         <% } %>
+
                             <% if(listing.reviews .length> 0){ %>
                                 <h3>All Reviews </h3>
                                 <div class="row">
@@ -99,6 +101,7 @@
                                         <% } %>
                                 </div>
                                 <% } %>
+
                 </div>
                 <div class="col-8 offset-2">
                     <h3>Where you'll be</h3>

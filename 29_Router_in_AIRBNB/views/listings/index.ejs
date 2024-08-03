@@ -4,6 +4,8 @@
             margin-block: 1rem;
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
+            /* width: 100%; */
         }
 
         .filter {
@@ -20,6 +22,18 @@
         .filter p {
             margin: 0%;
             font-size: 0.8rem;
+        }
+
+        .tax-info {
+            visibility: hidden;
+        }
+
+        .tax-toogle {
+            border: 1px solid slategray;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            padding-inline: 1rem;
+            margin-left: auto;
         }
     </style>
     <div id="filters">
@@ -77,6 +91,12 @@
             </div>
             <p>Arctic</p>
         </div>
+        <div class="tax-toogle">
+            <div class="form-check form-switch form-check-reverse tax-box">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Taxes</label>
+            </div>
+        </div>
     </div>
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-2">
@@ -92,6 +112,7 @@
                             </b>
                             <br>
                             &#8377; <%= list.price.toLocaleString('en-IN') %> / Night
+                                <i class="tax-info">&nbsp; &nbsp; +18%GST</i>
                         </p>
 
                     </div>
@@ -99,3 +120,17 @@
             </a>
             <% } %>
     </div>
+
+    <script>
+        let taxSwitch = document.querySelector('#flexSwitchCheckDefault');
+        taxSwitch.addEventListener('click', () => {
+            let taxInfo = document.getElementsByClassName('tax-info');
+            for (let i = 0; i < taxInfo.length; i++) {
+                if (taxInfo[i].style.visibility != 'visible') {
+                    taxInfo[i].style.visibility = 'visible'
+                } else {
+                    taxInfo[i].style.visibility = 'hidden'
+                }
+            }
+        })
+    </script>

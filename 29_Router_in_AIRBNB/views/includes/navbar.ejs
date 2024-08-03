@@ -9,6 +9,15 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/listings">Explores</a>
             </div>
+            <div class="ms-auto navbar-nav">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 rounded-pill ps-4 " type="search"
+                        placeholder="Search &nbsp; destination" aria-label="Search">
+                    <button
+                        class="btn btn-sm btn-outline-danger d-flex justify-content-center align-items-center rounded-pill px-3"
+                        type="submit"><i class="fa-solid fa-magnifying-glass me-1"></i>Search</button>
+                </form>
+            </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Airbnb your home</a>
                 <% if(!currUser){ %>
